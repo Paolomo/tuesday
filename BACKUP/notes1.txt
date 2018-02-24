@@ -1,0 +1,98 @@
+package MorrisseyPaul.MyFirstMavenApp;
+
+import java.util.Date;
+import java.util.Scanner;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	actionCommandlineInput(args);
+    	/*getSQLiteConnection();*/  
+    	getData();
+    }
+    
+	//define attributes
+   	private	Scanner someInput;
+   	private Date today;
+   	private static Logger LOG;
+   	
+  // constructor
+ 	public App()
+ 	{
+ 		LOG = LogManager.getLogger(App.class);
+ 		Configurator.setLevel(LOG.getName(), Level.DEBUG);
+ 		this.someInput = new Scanner(System.in);
+ 	    System.out.println(LOG.getName());
+ 		
+ 	    //do something here:
+ 		LOG.info( "Login check" );
+ 	     System.out.println("Please enter username:");
+         Scanner user = new Scanner(System.in);
+		
+         //user 
+         String username = user.next();
+         System.out.println(username+" is best!!");
+         
+      	
+ 	}
+ 	
+    private static void actionCommandlineInput( String args[] )
+    {
+    	 App anApp = new App();
+    }
+    
+   /* private static Connection getSQLiteConnection() {
+		// TODO Auto-generated method stub
+		
+    	//SQLite connection String
+    	String url = "jdbc:sqlite:C://SQLiteStudio/Paololite.db";
+    	
+    	Connection conn = null;
+    	
+    	try {
+    			conn = DriverManager.getConnection(url);
+    	} catch (SQLException e) {
+    		
+    		System.out.println(e.getMessage());
+    	}
+    	
+    	return conn;
+	}
+    */
+
+	private static void getData() {
+		// TODO Auto-generated method stub
+    	String url = "jdbc:sqlite:C://SQLiteStudio/Paololite.db";
+    	String sql  = "select pid, parent, SongId, SongTitle from users, music"
+    			+" where pid = Pid";
+    	
+    	try{
+    		
+    		Connection conn = DriverManager.getConnection(url);
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery(sql);
+    	
+    		while(rs.next()) {
+    			System.out.println(rs.getInt("pid") + "\t" + rs.getString("parent") + "\t"+ rs.getInt("SongId") + "\t"+ rs.getString("Songtitle") +"\t");
+    		}
+    		
+    	}catch (SQLException e) {
+    		
+    		System.out.println(e.getMessage());
+    	}
+		
+	}
+}
+
