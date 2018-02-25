@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.Logger;//What r these?
+import org.apache.logging.log4j.core.config.Configurator;//What r these?
 
 import java.sql.DriverManager;
 import java.sql.Connection;
