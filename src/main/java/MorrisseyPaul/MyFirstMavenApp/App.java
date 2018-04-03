@@ -39,7 +39,7 @@ actionCommandlineInput(args);
 
  //user 
  username = user.next();
- System.out.println(username+" is best!!");
+ System.out.println(username+" chosen");
  
 /*getSQLiteConnection();*/  
 getSQLiteData();
@@ -64,7 +64,7 @@ LOG = LogManager.getLogger(App.class);
 testLogOutput();
 this.someInput = new Scanner(System.in);
 //do something here
-System.out.println(" \n Soon ... stuff will happen here");
+System.out.println(" \n Stuff happening");//Goes to here first
 //pause before exit (this is only useful if an error occurs)
 /*System.out.println(" \n Press enter to exit the program");
 this.someInput.nextLine();
@@ -108,11 +108,11 @@ private static void getSQLiteData() {
 	String sql="";
 	String teacherId = "456";//hardcoded teacher id
 	if(username.matches(teacherId)) {
-	 sql  = "select pid, parent, SongId, SongTitle from users, music"
-			+" where pid = Pid and SongTitle not null";// Null rows in musiC table
+	 sql  = "select pid, parent, SongId, ThemeReason, SongTitle, Artist, Genre from users, musiC, ParentMusic"
+			+" where pid = Pidf and SongId = SongIdm and SongId not null";// Null rows in musiC table
 	}else {
-	 sql  = "select pid, parent, SongId, SongTitle from users, music"
-	    	+" where pid = Pid and SongTitle not null and pid="+username+"";
+	 sql  = "select pid, parent, SongId, ThemeReason, SongTitle, Artist, Genre from users, musiC, ParentMusic"
+				+" where pid = Pidf and SongId = SongIdm and SongId not null and pId="+username+"";
 	}
 
 	try{
@@ -122,7 +122,7 @@ private static void getSQLiteData() {
 		ResultSet rs = stmt.executeQuery(sql);
 	
 			while(rs.next()) {
-				System.out.println(rs.getInt("pid") + "\t" + rs.getString("parent") + "\t"+ rs.getInt("SongId") + "\t"+ rs.getString("Songtitle") +"\t");
+				System.out.println(rs.getInt("pid") + "\t" + rs.getString("parent") + "\t"+ rs.getInt("SongId")  + "\t" + rs.getString("SongTitle")+ "\t"+ rs.getString("Artist") + "\t"+ "\t"+ rs.getString("ThemeReason") +"\t");
 		}
 		
 	}catch (SQLException e) {
